@@ -1,5 +1,3 @@
-milestone-2-implementation-alex-andrew created by GitHub Classroom
-
 **Image Organization**
 
 Alex Chan, Andrew Young
