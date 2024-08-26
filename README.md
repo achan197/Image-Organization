@@ -1,4 +1,5 @@
 # milestone-2-implementation-alex-andrew
+
 milestone-2-implementation-alex-andrew created by GitHub Classroom
 
 **Image Organization**
@@ -6,7 +7,7 @@ milestone-2-implementation-alex-andrew created by GitHub Classroom
 Alex Chan, Andrew Young
 
 **To hear the audio version of our project or to view the corresponding animations for each feature, visit the link below.**
-https://www.youtube.com/watch?v=BCxl6tabmtQ 
+https://www.youtube.com/watch?v=BCxl6tabmtQ
 
 **There seemed to be mismatching bugs with our projects if we use different VR devices (HTC Vive, Quest, WebXR). We mainly used the HTC Vive as our main VR device, with the Quest and WebXR to help debug. It seemed that most of the bugs on the Quest and WebXr occurred after implementing the transitions, but running the project on HTC Vive seemed perfectly fine. If the latest commit of our project seems to break the application, you can pull the github commit called “Fixed Bugs”. This commit does not have the transitions, but the functionality works fine.**
 
@@ -16,7 +17,7 @@ Viewing and organizing a set of images on a 2D screen (laptop, phone, etc.) can 
 
 **Environment and Devices**
 
-We initially decided to create the project in Babylon, but ended up using Playcanvas instead. We primarily switch to Playcanvas because of the ability for live collaboration within the different editors. In addition, Playcanvas’ had their own version control as well as their own testing  environment, which made it easy to manage our project without the need to use github or npm. In terms of testing devices, we used the HTC Vive, Quest, and WebXR Emulator. We mainly used the HTC Vive as the main VR headset for our project while the Quest and WebXR were used to test different implementations throughout the project. It is important to note that the three different devices seemed to produce different bugs. For example, while we ran the project on the HTC Vive, only one minor bug would appear, but when using the Quest, the project produces bugs on several different actions. This issue mainly occurred after the addition of transitions in our project. 
+We initially decided to create the project in Babylon, but ended up using Playcanvas instead. We primarily switch to Playcanvas because of the ability for live collaboration within the different editors. In addition, Playcanvas’ had their own version control as well as their own testing environment, which made it easy to manage our project without the need to use github or npm. In terms of testing devices, we used the HTC Vive, Quest, and WebXR Emulator. We mainly used the HTC Vive as the main VR headset for our project while the Quest and WebXR were used to test different implementations throughout the project. It is important to note that the three different devices seemed to produce different bugs. For example, while we ran the project on the HTC Vive, only one minor bug would appear, but when using the Quest, the project produces bugs on several different actions. This issue mainly occurred after the addition of transitions in our project.
 
 **Setup**
 
@@ -68,9 +69,9 @@ To implement the reset of an image, a simple check is conducted to see whether t
 
 **Snapping onto an Image**
 
-We see categorizing images into a folder, or "stack" as we call it in our application, as one of the main tasks of organizing a set of images. To make this common action as easy as possible, we made it so that when a user drags an image within a certain radius of the center of another image, the dragged image will "snap" onto the other one as an indication that the user can create a stack. An audio cue and positional translation reinforce the interaction. A stack is made if the user lets go, or the image unsnaps if the user drags it far enough away. 
+We see categorizing images into a folder, or "stack" as we call it in our application, as one of the main tasks of organizing a set of images. To make this common action as easy as possible, we made it so that when a user drags an image within a certain radius of the center of another image, the dragged image will "snap" onto the other one as an indication that the user can create a stack. An audio cue and positional translation reinforce the interaction. A stack is made if the user lets go, or the image unsnaps if the user drags it far enough away.
 
-This too is done by raycasting. While a user is dragging a file around, a raycast returns the intersection point on the grid. The theta and height of the point relative to the center of the cylinder are used directly to get the index of the nearest file. Then the distance between the dragged file and the closest file is calculated, and if the distance is less than a certain amount, the dragged file's position is set to that of the closest file as a visual cue. A boolean check helps play the "tick" audio cue just once when snapping, and not once every frame that the two files are snapped together. 
+This too is done by raycasting. While a user is dragging a file around, a raycast returns the intersection point on the grid. The theta and height of the point relative to the center of the cylinder are used directly to get the index of the nearest file. Then the distance between the dragged file and the closest file is calculated, and if the distance is less than a certain amount, the dragged file's position is set to that of the closest file as a visual cue. A boolean check helps play the "tick" audio cue just once when snapping, and not once every frame that the two files are snapped together.
 
 **Creating and Adding to Stacks**
 
@@ -81,7 +82,7 @@ When a stack is made, the recipient file entity in the grid is replaced with a n
 **Remove from a Stack**
 
 Unstacking is the ability of the user to remove a file from a stack, either by repositioning it between two files or by dragging it directly into another stack. One decision we pondered is how to display a stack's files and how we should deal with the other files. As a solution, we decided to push the main grid into the background while viewing a stack, and this ended up being much less jarring when we added animations. Also, it is important to note that when the second-to-last file is removed from a stack, the stack is removed, and the last image within the stack is placed into the grid.
-Viewing a stack's contents involves populating a temporary grid object with the stack's contents and "scrolling" the grid to center the files. The scrolling is just two variables for offsets of the height and rotation of the grid. Removing from stacks was surprisingly tricky because by this point our code was suffering from a large number of states to keep track of, and we unfortunately had not vied for the well-structured state machine library. 
+Viewing a stack's contents involves populating a temporary grid object with the stack's contents and "scrolling" the grid to center the files. The scrolling is just two variables for offsets of the height and rotation of the grid. Removing from stacks was surprisingly tricky because by this point our code was suffering from a large number of states to keep track of, and we unfortunately had not vied for the well-structured state machine library.
 
 **Repositioning**
 
@@ -89,13 +90,13 @@ One task that users may see helpful is moving images around on the grid. That be
 
 Each hitbox corresponds to an image position on the grid, and when re-positioning is triggered, the images will shift row-wise to the selected image’s original position and then the images will shift column-wise of the new image position. A transition is applied to each image movement as it updates to its new position. An example is provided below.
 
-
 **Dynamic Movement of Images**
 
-It is important to note that during the process of creating/adding to stacks, images are removed from the grid. When an image is added to the grid, the images are coded to populate the empty spot in the grid (position of the image that was just added to a stack) by shifting the appropriate number of images row-wise and column-wise. This keeps images together and coherent without displaying random empty patches if multiple images are put into stacks. 
+It is important to note that during the process of creating/adding to stacks, images are removed from the grid. When an image is added to the grid, the images are coded to populate the empty spot in the grid (position of the image that was just added to a stack) by shifting the appropriate number of images row-wise and column-wise. This keeps images together and coherent without displaying random empty patches if multiple images are put into stacks.
 
 **Player Movement**
 
 The user can move along the XZ plane with the left controller pad and can rotate the camera with the right controller pad. Since the controller pads are also pressable buttons that are used in our interface, we made it so the directional input has to be above 40% before it moved the player, since it may be annoying to move accidentally when pressing the button.
-#   I m a g e - O r g a n i z a t i o n  
+#   I m a g e - O r g a n i z a t i o n 
+ 
  
